@@ -8,6 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@material-ui/core/Box";
 import { useContacts } from "./useContacts";
 import { ContactsTable } from "./ContactsTable/index";
+import { ContactsCard } from "./ContactsCard/index";
 import { ToggleDataViewMode } from './ToggleDataViewMode/index';
 import { DATA_VIEW_MODES } from './constants';
 import { useDataViewMode } from './useDataViewMode';
@@ -76,7 +77,6 @@ const clearFilters = () => {
             <Typography
               variant="h4"
               component="h1"
-              className={classes.headContainer}
             >
               Contacts
             </Typography>
@@ -101,7 +101,7 @@ const clearFilters = () => {
               return <ContactsTable data={filteredContacts} />;
             }
             if (dataViewMode === DATA_VIEW_MODES.GRID) {
-              return "grid";
+              return <ContactsCard data={filteredContacts}/>;
             }
             return null;
           })()}

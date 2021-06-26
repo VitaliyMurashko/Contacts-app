@@ -93,10 +93,11 @@ export const ContactsFilters = ({ filters, updateFilter, clearFilters }) => {
                 </FormControl>
             </Box>
             <Button
-                variant="outlined"
+                style={{color:"#f44336"}}
                 startIcon={<ClearIcon />}
                 size="small"
                 onClick={clearFilters}
+                title="очистка фильтров"
             >
                 clear
             </Button>
