@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-export const useContacts = (page) => {
+export const useContacts = ( page ) => {
     const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -9,7 +9,7 @@ export const useContacts = (page) => {
       const getContacts = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch(`https://randomuser.me/api/?results=8&page=${page || 1}`);
+            const response = await fetch(`https://randomuser.me/api/?results=8&page=${page || 1}&seed=188c3c4cad00c093`);
             const { results, error } = await response.json();
             if (error) {
                 throw new Error(error)
