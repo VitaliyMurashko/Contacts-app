@@ -11,19 +11,8 @@ import ClearIcon from "@material-ui/icons/Clear";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { NATIONALITIES_HUMAN_NAME } from "../../../constants/nationality";
 
-const useFieldGenderStyles = makeStyles((theme) =>
-  createStyles({
-    fieldGender: {
-      minWidth: "120px",
-    },
-    outlined: {
-      paddingBottom: "11px",
-      paddingTop: "10px",
-    },
-  })
-);
 
-const useFieldNatiolnalityStyles = makeStyles((theme) =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     fieldGender: {
       minWidth: "120px",
@@ -32,9 +21,13 @@ const useFieldNatiolnalityStyles = makeStyles((theme) =>
       paddingBottom: "11px",
       paddingTop: "10px",
     },
+    textFieldMArgin: {
+      margin: "0 20px 20px 0"
+    }
   })
 );
 const FieldFullname = memo(({ value, onChange }) => {
+  const classes = useStyles();
   return (
     <TextField
       label="Fullname"
@@ -43,12 +36,12 @@ const FieldFullname = memo(({ value, onChange }) => {
       size="small"
       value={value}
       onChange={onChange}
-      style={{ margin: "0 20px 0 0" }}
+      className={classes.textFieldMArgin}
     />
   );
 })
 const FieldGender = memo(({ value, onChange }) => {
-  const classes = useFieldGenderStyles();
+  const classes = useStyles();
   return (
     <FormControl variant="outlined" className={classes.fieldGender}>
       <InputLabel id="gender">Gender</InputLabel>
@@ -76,7 +69,7 @@ const FieldGender = memo(({ value, onChange }) => {
 });
 
 const FieldNatiolnality = memo(({ value, onChange }) => {
-  const classes = useFieldNatiolnalityStyles();
+  const classes = useStyles();
   return (
     <FormControl variant="outlined" className={classes.fieldNationality}>
       <InputLabel id="nationality">Nationality</InputLabel>
@@ -117,14 +110,14 @@ export const ContactsFilters = memo(
     );
 
     return (
-      <Box display="flex" justifyContent="space-between" marginBottom="10px">
-        <Box display="flex">
+      <Box display="flex" justifyContent="space-between" marginBottom="10px" flexWrap="wrap">
+        <Box display="flex" flexWrap="wrap">
           <FieldFullname value={filters.fullname} onChange={handleChangeFilter}/>
           <FieldGender value={filters.gender} onChange={handleChangeFilter} />
           <FieldNatiolnality value={filters.nationality} onChange={handleChangeFilter}/>
         </Box>
         <Button
-          style={{ color: "#f44336" }}
+          style={{ color: "#f44336", alignItems: "flex-start" }}
           startIcon={<ClearIcon />}
           size="small"
           onClick={clearFilters}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DATA_VIEW_MODES } from './constants';
 
-const getInitialDataViewMode = () => localStorage.getItem("dataViewMode") || DATA_VIEW_MODES.TABLE;
+const getInitialDataViewMode = () => localStorage.getItem("dataViewMode") || DATA_VIEW_MODES.GRID;
 
 export const useDataViewMode = () => {
   

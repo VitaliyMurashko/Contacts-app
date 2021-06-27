@@ -21,7 +21,9 @@ export function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline/>
       <div className="App">
-        <ToggleThemeColorMode themeColor={themeColor} setThemeColor={setThemeColor}/>
+        <div style={{display:"flex", justifyContent:"flex-end"}}>
+          <ToggleThemeColorMode themeColor={themeColor} setThemeColor={setThemeColor}/>
+        </div>
         <Contacts />
       </div>
     </ThemeProvider>

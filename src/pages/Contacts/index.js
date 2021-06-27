@@ -12,13 +12,19 @@ import { ContactsCard } from "./ContactsCard/index";
 import { ToggleDataViewMode } from './ToggleDataViewMode/index';
 import { DATA_VIEW_MODES } from './constants';
 import { useDataViewMode } from './useDataViewMode';
+import { PaginationRounded } from './Pagination/index'
 
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       marginTop: theme.spacing(4),
+      flexWrap:"wrap"
     },
+    paginationContainer: {
+      display:"flex",
+      justifyContent:"center"
+    }
   })
 );
 
@@ -49,9 +55,11 @@ const filterByNationality = (value, nationality) => {
 
 export const Contacts = () => {
   const classes = useStyles();
-  const contacts = useContacts();
+  const [page, setPage] = useState(1);
+  const contacts = useContacts(page);
   const [dataViewMode, setDataViewMode] = useDataViewMode();
   const [filters, setFilters] = useState(FiltersDefaultValue);
+  
 
   const updateFilter = useCallback((name, value) => {
     setFilters((prevFilters) => ({
@@ -83,7 +91,7 @@ const clearFilters = useCallback(() => {
             <ToggleDataViewMode dataViewMode={dataViewMode} setDataViewMode={setDataViewMode}/>
           </Box>
         </Grid>
-        <Grid item xs={12} className={ classes.filterContainer }>
+        <Grid item xs={12} className={ classes.filterContainer } >
           <ContactsFilters filters={filters} updateFilter={updateFilter} clearFilters ={clearFilters}/>
         </Grid>
         <Grid item xs={12}>
@@ -105,6 +113,9 @@ const clearFilters = useCallback(() => {
             }
             return null;
           })()}
+        </Grid>
+        <Grid item xs={12} className={classes.paginationContainer}>
+          <PaginationRounded page={page} setPage={setPage}/>
         </Grid>
       </Grid>
     </Container>
