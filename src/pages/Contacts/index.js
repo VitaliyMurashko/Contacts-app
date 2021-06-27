@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { ContactsFilters } from "./ContactsFilters";
@@ -53,21 +53,21 @@ export const Contacts = () => {
   const [dataViewMode, setDataViewMode] = useDataViewMode();
   const [filters, setFilters] = useState(FiltersDefaultValue);
 
-  const updateFilter = (name, value) => {
+  const updateFilter = useCallback((name, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]:value,
     }));
-  }
+  }, []);
 
 const filteredContacts = contacts.data
 .filter(c => filterByFullName(c.name, filters.fullname))
 .filter(c => filterByGender(c.gender, filters.gender))
 .filter(c => filterByNationality(c.nat, filters.nationality));
 
-const clearFilters = () => {
+const clearFilters = useCallback(() => {
   setFilters(FiltersDefaultValue)
-}
+}, []);
 
   return (
     <Container className={classes.root}>
